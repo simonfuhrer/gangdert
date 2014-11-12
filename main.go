@@ -17,7 +17,6 @@ func init() {
 	flag.Set("mode", "release")
 	flag.Parse()
 	conf.Load()
-
 }
 
 func ceateQRCode(c *gin.Context) {
@@ -29,6 +28,7 @@ func ceateQRCode(c *gin.Context) {
 func main() {
 	runtime.GOMAXPROCS(conf.GangDert.MaxProcs)
 	defer glog.Flush()
+	glog.Info("Started")
 	glog.Infof(conf.GangDert.Listen)
 
 	engine := gin.New()

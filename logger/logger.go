@@ -18,40 +18,6 @@ var (
 	reset   = string([]byte{27, 91, 48, 109})
 )
 
-func colorForStatus(code int) string {
-	switch {
-	case code >= 200 && code <= 299:
-		return green
-	case code >= 300 && code <= 399:
-		return white
-	case code >= 400 && code <= 499:
-		return yellow
-	default:
-		return red
-	}
-}
-
-func colorForMethod(method string) string {
-	switch {
-	case method == "GET":
-		return blue
-	case method == "POST":
-		return cyan
-	case method == "PUT":
-		return yellow
-	case method == "DELETE":
-		return red
-	case method == "PATCH":
-		return green
-	case method == "HEAD":
-		return magenta
-	case method == "OPTIONS":
-		return white
-	default:
-		return reset
-	}
-}
-
 //Logger2 sadsad
 func Logger2() gin.HandlerFunc {
 	//stdlogger := log.New(os.Stdout, "", 0)
@@ -95,39 +61,6 @@ func Logger2() gin.HandlerFunc {
 			latency,
 			requester,
 			c.Request.Method, c.Request.URL.Path,
-			c.Errors.String(),
-		)
-	}
-}
-
-//Logger sadas
-func Logger() gin.HandlerFunc {
-	//stdlogger := log.New(os.Stdout, "", 0)
-	//errlogger := log.New(os.Stderr, "", 0)
-
-	return func(c *gin.Context) {
-		// Start timer
-		start := time.Now()
-
-		// Process request
-		c.Next()
-
-		// Stop timer
-		end := time.Now()
-		latency := end.Sub(start)
-
-		//	clientIP := c.ClientIP()
-		method := c.Request.Method
-		statusCode := c.Writer.Status()
-		statusColor := colorForStatus(statusCode)
-		methodColor := colorForMethod(method)
-
-		glog.Infof("[GIN] %v |%s %3d %s| %12v | %s |%s  %s %-7s %s\n%s",
-			end.Format("2006/01/02 - 15:04:05"),
-			statusColor, statusCode, reset,
-			latency,
-			methodColor, reset, method,
-			c.Request.URL.Path,
 			c.Errors.String(),
 		)
 	}

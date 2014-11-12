@@ -18,8 +18,8 @@ var (
 	reset   = string([]byte{27, 91, 48, 109})
 )
 
-//Logger2 sadsad
-func Logger2() gin.HandlerFunc {
+//Logger sadsad
+func Logger() gin.HandlerFunc {
 	//stdlogger := log.New(os.Stdout, "", 0)
 	//errlogger := log.New(os.Stderr, "", 0)
 

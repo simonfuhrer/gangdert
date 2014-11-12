@@ -34,7 +34,7 @@ func main() {
 	engine := gin.New()
 	gin.SetMode(conf.GangDert.RuntimeMode)
 
-	engine.Use(gin.Recovery(), logger.Logger2())
+	engine.Use(gin.Recovery(), logger.Logger())
 	engine.GET("/:code", ceateQRCode)
 
 	engine.Run(conf.GangDert.Listen)
